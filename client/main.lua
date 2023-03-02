@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+ESX = exports["es_extended"]:getSharedObject()
 
 local FullyLoaded = LocalPlayer.state.isLoggedIn
 
@@ -482,14 +482,16 @@ AddStateBagChangeHandler('isLoggedIn', nil, function(_, _, value)
     FullyLoaded = value
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer, isNew)
     Wait(100)
     spawnDelivPed()
     if Config.MissionPed.createBlip then createPedBlip() end
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    deleteDelivPed()
+RegisterNetEvent('esx:playerLogout')
+AddEventHandler('esx:playerLogout', function()
+	deleteDelivPed()
     deleteDropOffPed()
 end)
 

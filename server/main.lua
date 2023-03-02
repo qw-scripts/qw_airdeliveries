@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+ESX = exports["es_extended"]:getSharedObject()
 local deliveryVehicles = {}
 
 RegisterNetEvent('qw_airdeliveries:server:failedMission', function() 
@@ -18,7 +18,7 @@ end)
 
 RegisterNetEvent('qw_airdeliveries:server:finishMission', function(payout)
     local src = source
-    local Player = QBCore.Functions.GetPlayer(src)
+    local Player = ESX.GetPlayerFromId(src)
 
     if not Player then return end
 
@@ -32,7 +32,7 @@ RegisterNetEvent('qw_airdeliveries:server:finishMission', function(payout)
         end
     end
 
-    Player.Functions.AddMoney('bank', payout, "air-delivery")
+    Player.giveAccountMoney('bank', payout)
 end)
 
 RegisterNetEvent('qw_airdeliveries:server:spawnVehicle', function(model, coords, vehicleType)
